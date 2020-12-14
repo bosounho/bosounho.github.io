@@ -1,0 +1,375 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>大何生のBLOG | 大何生のBLOG</title><meta name="author" content="大何生"><meta name="copyright" content="大何生"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="—title: PHP取经（二）变量、标量、特殊类型 超详细PHP学习笔记tags:  PHPcategories: 网安学习abbrlink: 99bc7e1c   变量是用于存储值的，我们命令服务器去干活的时候，往往需要产生一些数据，需要临时性存放起来，方便取用。我们也可以理解为，变量就像一个购物袋，我们可以用来装苹果、榴莲（当然也可以用来装玫瑰），需要注意的是，一般情况下一个变量只能装一个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="大何生のBLOG">
+<meta property="og:url" content="https://bosounho.gitee.io/2020/12/10/PHP%E5%8F%96%E7%BB%8F%EF%BC%88%E4%BA%8C%EF%BC%89%E5%8F%98%E9%87%8F%E3%80%81%E6%A0%87%E9%87%8F%E3%80%81%E7%89%B9%E6%AE%8A%E7%B1%BB%E5%9E%8B%20%E8%B6%85%E8%AF%A6%E7%BB%86PHP%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="大何生のBLOG">
+<meta property="og:description" content="—title: PHP取经（二）变量、标量、特殊类型 超详细PHP学习笔记tags:  PHPcategories: 网安学习abbrlink: 99bc7e1c   变量是用于存储值的，我们命令服务器去干活的时候，往往需要产生一些数据，需要临时性存放起来，方便取用。我们也可以理解为，变量就像一个购物袋，我们可以用来装苹果、榴莲（当然也可以用来装玫瑰），需要注意的是，一般情况下一个变量只能装一个">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg">
+<meta property="article:published_time" content="2020-12-10T13:03:19.523Z">
+<meta property="article:modified_time" content="2020-12-14T08:58:03.411Z">
+<meta property="article:author" content="大何生">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://bosounho.gitee.io/2020/12/10/PHP%E5%8F%96%E7%BB%8F%EF%BC%88%E4%BA%8C%EF%BC%89%E5%8F%98%E9%87%8F%E3%80%81%E6%A0%87%E9%87%8F%E3%80%81%E7%89%B9%E6%AE%8A%E7%B1%BB%E5%9E%8B%20%E8%B6%85%E8%AF%A6%E7%BB%86PHP%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: 'days',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  ClickShowText: undefined,
+  lightbox: 'mediumZoom',
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2020-12-14 16:58:03'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+   if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+  const autoChangeMode = '1'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><meta name="generator" content="Hexo 5.2.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/tx.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">7</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">4</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">1</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-gg"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-won-sign"></i><span> 关于我</span></a></div></div></div></div><div id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">大何生のBLOG</a></span><span id="menus"><div id="search_button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-gg"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-won-sign"></i><span> 关于我</span></a></div></div><span class="close" id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><h1 class="post-title">No title</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2020-12-10T13:03:19.523Z" title="Created 2020-12-10 21:03:19">2020-12-10</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2020-12-14T08:58:03.411Z" title="Updated 2020-12-14 16:58:03">2020-12-14</time></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word count:</span><span class="word-count">2.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading time:</span><span>9min</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>﻿—<br>title: PHP取经（二）变量、标量、特殊类型 超详细PHP学习笔记<br>tags:</p>
+<ul>
+<li>PHP<br>categories:</li>
+<li>网安学习<br>abbrlink: 99bc7e1c</li>
+</ul>
+<hr>
+<p>变量是用于存储值的，我们命令服务器去干活的时候，往往需要产生一些数据，需要临时性存放起来，方便取用。我们也可以理解为，变量就像一个购物袋，我们可以用来装苹果、榴莲（当然也可以用来装玫瑰），需要注意的是，一般情况下一个变量只能装一个（不要太贪心）值，除非是复合变量（后面变量类型时会介绍），当我们放进去一个苹果后，再放进榴莲的时候，苹果就被替换掉，再放入香蕉，那么榴莲就被替换了。</p>
+<pre><code class="php">&lt;?php
+    $var = &quot;一起学习PHP&quot;;
+    echo $var;
+    echo &quot;&lt;br /&gt;&quot;;
+    $var = &quot;hello word&quot;;
+    echo $var;
+?&gt;</code></pre>
+<p>输出结果就是</p>
+<blockquote>
+<p>一起学习PHP<br>hello word</p>
+</blockquote>
+<h2 id="定义变量"><a href="#定义变量" class="headerlink" title="定义变量"></a>定义变量</h2><pre><code class="php">&lt;?php
+$var_name = “苹果”;
+$n = 10;
+?&gt;</code></pre>
+<p>解释一下，在“=”左边是变量名，右边是变量值，完成定义变量后，需要一个<code>;</code>告诉服务器这行指令已经结束。其中变量名必须通过<code>$</code>符号标识；“=”可不是我们平常所说的等号哦，在PHP中，<code>=</code>是赋值运算符(后面部分的小节会介绍)；在这里，var_name是变量名，“苹果”是变量值，它是一个字符串；n是变量名，10是变量值，它是一个整型<em>（变量的数据类型的一种，后面部分会介绍）</em>。</p>
+<h2 id="PHP-变量名的命名规则"><a href="#PHP-变量名的命名规则" class="headerlink" title="PHP-变量名的命名规则"></a>PHP-变量名的命名规则</h2><p>变量名除了需要“$”进行标识外，还有一些规则需要遵守。变量名的命名规则主要有三条：</p>
+<ol>
+<li>变量名必须以字母或下划线 “_”开头,如”<code>$_name</code>“,”<code>$name</code>“ ,”<code>$name2</code>“等,但是”<code>$9name</code>“是不对的。</li>
+<li>变量名只能由字母.数字.以及”<code>_</code>“组成,还能包含汉字.如”<code>$_qq</code>“,”<code>$qq308</code>“ ,”<code>$my_apple</code>“,”比如”<code>$name我等</code>“,但是”<code>$name*</code>“是不对的。</li>
+<li>变量名不允许包含空格.当变量名由多个单词组成,建议使用”<code>_</code>“进行分隔(比如 <code>$my_apple</code>),俗称下划线法,或者以大写字母开头比如 <code>$myApple</code>,俗称骆驼式命名法(也称驼峰命名法)。</li>
+</ol>
+<p><em>在PHP中变量名是区分大小写的，如“<code>$my_book</code>”与“<code>$my_Book</code>”代表两个不同的变量。</em></p>
+<h2 id="变量的数据类型"><a href="#变量的数据类型" class="headerlink" title="变量的数据类型"></a>变量的数据类型</h2><p>在变量中，由于变量占用的空间单元不一样（占的地盘大小不一样），也分成几种数据类型，我们可以通过使用“<code>memory_get_usage</code>”获取当前PHP消耗的内存。</p>
+<pre><code class="php">&lt;?php 
+echo $m1 = memory_get_usage(); 
+echo &quot;&lt;br /&gt;&quot;;
+ $var_string = &quot;123&quot;;
+echo $m2 = memory_get_usage()-$m1; 
+echo &quot;&lt;br /&gt;&quot;;
+ $n=123;
+echo $m3 = memory_get_usage()-$m1-$m2; 
+echo &quot;&lt;br /&gt;&quot;;
+ $f=123.00;
+echo $m4 = memory_get_usage()-$m1-$m2-$m3; 
+echo &quot;&lt;br /&gt;&quot;;
+ $var_array = array(&quot;123&quot;);
+echo $m5 = memory_get_usage()-$m1-$m2-$m3-$m4; 
+?&gt;</code></pre>
+<p>如上，分别定义四种不同的数据类型，分别是字符串类型，整型，浮点型和数组，通过<code>memory_get_usage()</code>检查，发现初始化消耗了625240，字符串消耗360，整型和浮点型都是288，数组消耗632。</p>
+<blockquote>
+<p>625240<br>360<br>288<br>288<br>632</p>
+</blockquote>
+<p>在PHP中，支持8种原始类型，其中包括四种标量类型、两种复合类型和两种特殊类型。*(php语言不需要在声明变量的时候声明变量的数据类型。)*<br>做个小测试验证一下这个知识点</p>
+<pre><code class="php">&lt;?php 
+$string = &quot;雷霆嘎巴&quot;;
+ var_dump($string);
+ echo &quot;&lt;br /&gt;&quot;;
+$string = 857857;
+ var_dump($string);
+  echo &quot;&lt;br /&gt;&quot;;
+?&gt;</code></pre>
+<p>输出结果:</p>
+<blockquote>
+<p>string(12) “雷霆嘎巴”<br>int(857857)</p>
+</blockquote>
+<p>我们可以发现， 这个变量自动就从原来的字符串转换成了整型咯。</p>
+<h2 id="标量类型——布尔类型"><a href="#标量类型——布尔类型" class="headerlink" title="标量类型——布尔类型"></a>标量类型——布尔类型</h2><p>布尔类型（boolean）：只有两个值，一个是TRUE，另一个FALSE，可以理解为是或否。它不区分大小写，“TRUE”和“true”效果是一样的。<br>当我们用”<code>echo</code>”指令输出布尔类型时，如果是“true”则输出的是“1”，“false”则什么也不输出。我们可以使用“<code>var_dump</code>”函数，获取它真正的数据类型。</p>
+<pre><code class="php">&lt;?php 
+  $man = &quot;男&quot;;   
+  $flag = $man == &quot;男&quot;;    
+    echo $flag ;
+    echo &quot;&lt;br /&gt;&quot; ;
+    var_dump($flag);
+?&gt;</code></pre>
+<p>测试结果：</p>
+<blockquote>
+<p>1<br>bool(true)</p>
+</blockquote>
+<p>如果把设定的字符串$man中的“男”改为其他的，例如“女”<br>测试结果为：</p>
+<blockquote>
+<p>bool(false)</p>
+</blockquote>
+<h2 id="详述数据类型中的整型"><a href="#详述数据类型中的整型" class="headerlink" title="详述数据类型中的整型"></a>详述数据类型中的<font color=darkorange >整型</font></h2><p>整型（integer）：类似于常见的整数。它可以用十进制、八进制、十六进制指定。十进制就是日常使用的数字；八进制，数字前必须加上“0”；十六进制，数字前必须加“0x”。</p>
+<pre><code class="php">&lt;?php
+$data_int1 = 123;// 十进制数 
+echo $data_int1;
+echo &quot;&lt;br /&gt;&quot;;
+$data_int2 = -123;// 一个负数
+echo $data_int2;
+echo &quot;&lt;br /&gt;&quot;;
+$data_int3 = 0123; // 八进制数（等于十进制的83)
+echo $data_int3;
+echo &quot;&lt;br /&gt;&quot;;
+$data_int4 = 0x123;// 十六进制数（等于十进制的26）
+echo $data_int4;
+echo &quot;&lt;br /&gt;&quot;;
+?&gt;</code></pre>
+<p>输出结果：</p>
+<blockquote>
+<p>123<br>-123<br>83<br>291</p>
+</blockquote>
+<p>八进制的“0123;”等于10进制中的83，十六进制的“0x123;”等于10进制的291。</p>
+<h1 id="标量类型"><a href="#标量类型" class="headerlink" title="标量类型"></a>标量类型</h1><h2 id="标量类型—浮点型"><a href="#标量类型—浮点型" class="headerlink" title="标量类型—浮点型"></a>标量类型—浮点型</h2><p>浮点型（浮点数、双精度数或实数），也就是通常说的小数，可以用小数点或者科学计数法表示。科学计数法可以使用小写的e，也可以使用大写的E。</p>
+<pre><code class="php">&lt;?php
+$num_float1 = 1.234;//小数点  
+echo $num_float1;
+echo &quot;&lt;br /&gt;&quot;;
+$num_float2 = 1.2e3; //科学计数法，小写e  
+echo $num_float2;
+echo &quot;&lt;br /&gt;&quot;;
+$num_float3 = 7.0E-3;//科学计数法，大写E  
+echo $num_float3;
+echo &quot;&lt;br /&gt;&quot;;
+?&gt;</code></pre>
+<p>输出结果：</p>
+<blockquote>
+<p>1.234<br>1200<br>0.007</p>
+</blockquote>
+<p>我们可以发现，可以根据需要使用小数点或科学计数法来定义浮点型变量。</p>
+<h2 id="标量类型—字符串"><a href="#标量类型—字符串" class="headerlink" title="标量类型—字符串"></a>标量类型—字符串</h2><p>在PHP中，字符和字节一样，也就是说，一共有256种不同字符的可能性。字符串型可以用三种方法定义：<strong>单引号形式</strong>、<strong>双引号形式</strong>和<strong>Heredoc</strong>结构形式。<br>当出现字符串中的内容也需要用引号引用的时候可以双引号内嵌入单引号，或者单引号内嵌入双引号，或者用<code>/</code>来做嵌入，例如：</p>
+<pre><code class="php">&lt;?php 
+$str_string1 = &#39;韩信：&quot;瑶妹跟我，谢谢&quot;&#39;;       //单引号中嵌入双引号
+$str_string2 = &quot;瑶：&#39;我和后裔是情侣，不去了&#39;&quot;;//双引号中嵌入单引号
+$str_string3 = &#39;韩信:\&#39;后裔真坑，跟我\&#39;&#39;;  //单引号中嵌入单引号
+$str_string4 = &quot;后裔:\&quot;去跟着韩信吧\&quot;&quot;;  //单引号中嵌入双引号
+echo $str_string1;
+echo &quot;&lt;br /&gt;&quot;;
+echo $str_string2;
+echo &quot;&lt;br /&gt;&quot;;
+echo $str_string3;
+echo &quot;&lt;br /&gt;&quot;;
+echo $str_string4;
+echo &quot;&lt;br /&gt;&quot;;
+?&gt;</code></pre>
+<p>输出结果：</p>
+<blockquote>
+<p>韩信：”瑶妹跟我，谢谢”<br>瑶：’我和后裔是情侣，不去了’<br>韩信:’后裔真坑，跟我’<br>后裔:”去跟着韩信吧”</p>
+</blockquote>
+<h3 id="当字符串中引号遇到美元咋办？"><a href="#当字符串中引号遇到美元咋办？" class="headerlink" title="当字符串中引号遇到美元咋办？"></a>当字符串中引号遇到美元咋办？</h3><p>这里的美元可不是真正的美元，而是用美元符号标识的变量。<br>当双引号中包含变量时，变量会与双引号中的内容连接在一起；<br>当单引号中包含变量时，变量会被当做字符串输出。</p>
+<pre><code class="php">&lt;?php 
+$love = &quot;I love you!&quot;; 
+$string1 = &quot;鞠婧祎,$love&quot;;
+$string2 = &#39;鞠婧祎,$love&#39;;
+echo $string1;
+echo &quot;&lt;br /&gt;&quot;;
+echo $string2;
+?&gt;</code></pre>
+<p>输出结果：</p>
+<blockquote>
+<p>鞠婧祎,I love you!<br>鞠婧祎,$love</p>
+</blockquote>
+<h3 id="当我的字符串很长怎么办？"><a href="#当我的字符串很长怎么办？" class="headerlink" title="当我的字符串很长怎么办？"></a>当我的字符串很长怎么办？</h3><p>可以使用Heredoc结构形式的方法来解决该问题，首先使用定界符表示字符串（<code>&lt;&lt;&lt;</code>），接着在“<code>&lt;&lt;&lt;</code>“之后提供一个标识符<code>GOD</code>，然后是字符串，最后以提供的这个标识符结束字符串。</p>
+<pre><code class="php">&lt;?php 
+$string1 = &lt;&lt;&lt;HS
+荆楚大疫，数万人染疾，
+众人皆恐，足不出户，
+时天下震动，
+南山抵守江南郡，率白衣军众数万，
+九州一心，举国防疫，能者皆竭力。
+数月，疫尽去。
+华灯初上，万国称赞，
+人声鼎沸，国泰民安。
+HS;
+
+echo $string1;
+?&gt;</code></pre>
+<p>输出结果就是代码中的绿字主内容。<br>在赋值符号<code>=</code>后，输入定界符“<code>&lt;&lt;&lt;</code>”,接着是标识符，这里的“<code>HS</code>”就是标识符，那么问题来了，<code>HS</code>有什么含义呢，莫名其妙对不对，HS是“何生”的首字母。这下知道了吧，界定符后面的表示符是自定义的。此外，在结尾的一行，一定要另起一行，并且此行除了“<code>HS</code>”，并以“<code>;</code>”号结束之外，不能有任何其他字符，前后都不能有，包括空格，否则会出现错误的哦。</p>
+<h1 id="特殊类型"><a href="#特殊类型" class="headerlink" title="特殊类型"></a>特殊类型</h1><h2 id="第一种特殊类型—资源"><a href="#第一种特殊类型—资源" class="headerlink" title="第一种特殊类型—资源"></a>第一种特殊类型—<font color=darkorange >资源</font></h2><p>资源（resource）：资源是由专门的函数来建立和使用的，例如打开文件、数据连接、图形画布。我们可以对资源进行操作（创建、使用和释放）。任何资源，在不需要的时候应该被及时释放。如果我们忘记了释放资源，系统自动启用垃圾回收机制，在页面执行完毕后回收资源，以避免内存被消耗殆尽。<br>假设在服务器上，你发现了一个文件，是不是很好奇，想看看里面写了啥。嘿嘿，PHP可以做到哦（但是如果是隐私文件，可不能偷窥哦，就像偷窥陈冠*的照片一样，要坐牢滴！）。假设服务器上有个文件为“f.txt”，这时候，我们就需要用到资源这种特殊的数据类型。</p>
+<pre><code class="php">&lt;?php 
+//首先采用“fopen”函数打开文件，得到返回值的就是资源类型。
+$file_handle = fopen(&quot;/data/webroot/resource/php/f.txt&quot;,&quot;r&quot;);//&quot;r&quot;表示打开只读文件
+if ($file_handle)&#123;
+    //接着采用while循环（后面语言结构语句中的循环结构会详细介绍）一行行地读取文件，然后输出每行的文字
+    while (!feof($file_handle)) &#123; //判断是否到最后一行
+        $line = fgets($file_handle); //读取一行文本
+        echo $line; //输出一行文本
+        echo &quot;&lt;br /&gt;&quot;; //换行
+    &#125;
+&#125;
+fclose($file_handle);//关闭文件
+?&gt;</code></pre>
+<p>这个测试是需要服务器上存在“f.txt”这个文件的，如果不存在会报错，并且注意路径要正确。</p>
+<h2 id="第二种特殊类型—空类型"><a href="#第二种特殊类型—空类型" class="headerlink" title="第二种特殊类型—空类型"></a>第二种特殊类型—<font color=darkorange >空类型</font></h2><p><font color=darkorange >空类型</font>（NULL）：NULL是空类型，对大小写不敏感，NULL类型只有一个取值，表示一个变量没有值，当被赋值为NULL，或者尚未被赋值，或者被unset()，这三种情况下变量被认为为NULL。</p>
+<pre><code class="php">&lt;?php 
+ error_reporting(0); //禁止显示PHP警告提示
+ $var;//为变量未赋值
+ var_dump($var);
+ $var1 = null;//“null”赋值给变量“$var1”
+ var_dump($var1);
+ $var2 = NULL;//将“NULL”赋值给变量“$var2”
+ var_dump( $var2);
+ $var3 = &quot;节日快乐！&quot;;
+ unset($var3);//将变量“$var3”注销定义
+ var_dump($var3);
+?&gt;</code></pre>
+<p>运行结果：</p>
+<blockquote>
+<p>NULL NULL NULL NULL</p>
+</blockquote>
+<hr>
+<center><font color=green >未完待续.....</font></center>
+
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">大何生</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://bosounho.gitee.io/2020/12/10/PHP%E5%8F%96%E7%BB%8F%EF%BC%88%E4%BA%8C%EF%BC%89%E5%8F%98%E9%87%8F%E3%80%81%E6%A0%87%E9%87%8F%E3%80%81%E7%89%B9%E6%AE%8A%E7%B1%BB%E5%9E%8B%20%E8%B6%85%E8%AF%A6%E7%BB%86PHP%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">https://bosounho.gitee.io/2020/12/10/PHP%E5%8F%96%E7%BB%8F%EF%BC%88%E4%BA%8C%EF%BC%89%E5%8F%98%E9%87%8F%E3%80%81%E6%A0%87%E9%87%8F%E3%80%81%E7%89%B9%E6%AE%8A%E7%B1%BB%E5%9E%8B%20%E8%B6%85%E8%AF%A6%E7%BB%86PHP%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" data-sites="facebook,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> Donate<div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat.jpg" target="_blank"><img class="post-qr-code-img" src="/img/wechat.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/alipay.jpg" target="_blank"><img class="post-qr-code-img" src="/img/alipay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/12/10/PHP%E5%8F%96%E7%BB%8F%EF%BC%88%E4%B8%80%EF%BC%89%E5%88%9D%E8%AF%86/"><img class="prev-cover" src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1582709614468&amp;di=5ffbec934c890aba60d63718f63a3c15&amp;imgtype=0&amp;src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201812%2F03%2F20181203221415_djuds.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">PHP取经（一）初识</div></div></a></div><div class="next-post pull-right"><a href="/2020/12/10/Hexo-yilia%E4%B8%BB%E9%A2%98%E4%B8%AA%E6%80%A7%E5%8C%96%E7%BE%8E%E5%8C%96%E5%8F%8A%E5%8A%9F%E8%83%BD%E6%B7%BB%E5%8A%A0/"><img class="next-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info"></div></div></a></div></nav></div><div class="aside_content" id="aside_content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><img class="avatar-img" src="/img/tx.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">大何生</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">7</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">4</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">1</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/bosounho" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:he.shao@foxmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://www.zhihu.com/people/he-sheng-51-24" target="_blank" title=""><i class="fas fa-user-astronaut"></i></a></div></div></div><div class="card-widget card-announcement"><div class="card-content"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>Announcement</span></div><div class="announcement_content">This is my Blog</div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="card-content"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F"><span class="toc-number">1.</span> <span class="toc-text">定义变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PHP-%E5%8F%98%E9%87%8F%E5%90%8D%E7%9A%84%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99"><span class="toc-number">2.</span> <span class="toc-text">PHP-变量名的命名规则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">3.</span> <span class="toc-text">变量的数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%87%E9%87%8F%E7%B1%BB%E5%9E%8B%E2%80%94%E2%80%94%E5%B8%83%E5%B0%94%E7%B1%BB%E5%9E%8B"><span class="toc-number">4.</span> <span class="toc-text">标量类型——布尔类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%A6%E8%BF%B0%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%AD%E7%9A%84%E6%95%B4%E5%9E%8B"><span class="toc-number">5.</span> <span class="toc-text">详述数据类型中的整型</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A0%87%E9%87%8F%E7%B1%BB%E5%9E%8B"><span class="toc-number"></span> <span class="toc-text">标量类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%87%E9%87%8F%E7%B1%BB%E5%9E%8B%E2%80%94%E6%B5%AE%E7%82%B9%E5%9E%8B"><span class="toc-number">1.</span> <span class="toc-text">标量类型—浮点型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%87%E9%87%8F%E7%B1%BB%E5%9E%8B%E2%80%94%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-number">2.</span> <span class="toc-text">标量类型—字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BD%93%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E5%BC%95%E5%8F%B7%E9%81%87%E5%88%B0%E7%BE%8E%E5%85%83%E5%92%8B%E5%8A%9E%EF%BC%9F"><span class="toc-number">2.1.</span> <span class="toc-text">当字符串中引号遇到美元咋办？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BD%93%E6%88%91%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%BE%88%E9%95%BF%E6%80%8E%E4%B9%88%E5%8A%9E%EF%BC%9F"><span class="toc-number">2.2.</span> <span class="toc-text">当我的字符串很长怎么办？</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%89%B9%E6%AE%8A%E7%B1%BB%E5%9E%8B"><span class="toc-number"></span> <span class="toc-text">特殊类型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%A7%8D%E7%89%B9%E6%AE%8A%E7%B1%BB%E5%9E%8B%E2%80%94%E8%B5%84%E6%BA%90"><span class="toc-number">1.</span> <span class="toc-text">第一种特殊类型—资源</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E7%A7%8D%E7%89%B9%E6%AE%8A%E7%B1%BB%E5%9E%8B%E2%80%94%E7%A9%BA%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.</span> <span class="toc-text">第二种特殊类型—空类型</span></a></li></ol></div></div></div><div class="card-widget card-recent-post"><div class="card-content"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2020/12/10/%E8%BF%99%E4%B8%AA2020%E5%88%9D/" title="No title"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="No title"/></a><div class="content"><a class="title" href="/2020/12/10/%E8%BF%99%E4%B8%AA2020%E5%88%9D/" title="No title">No title</a><time datetime="2020-12-10T13:03:19.721Z" title="Created 2020-12-10 21:03:19">2020-12-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/12/10/SQL%E6%B3%A8%E5%85%A5%C2%B7sqli-labs%C2%B7%E5%9F%BA%E4%BA%8E%E9%94%99%E8%AF%AF%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2_%E6%95%B0%E5%AD%97%E5%9E%8B%E6%B3%A8%E5%85%A5%EF%BC%88%E7%AC%AC1~2%E5%85%B3%EF%BC%89/" title="SQL注入·sqli-labs·基于错误的字符串_数字型注入（第1~2关）"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="SQL注入·sqli-labs·基于错误的字符串_数字型注入（第1~2关）"/></a><div class="content"><a class="title" href="/2020/12/10/SQL%E6%B3%A8%E5%85%A5%C2%B7sqli-labs%C2%B7%E5%9F%BA%E4%BA%8E%E9%94%99%E8%AF%AF%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2_%E6%95%B0%E5%AD%97%E5%9E%8B%E6%B3%A8%E5%85%A5%EF%BC%88%E7%AC%AC1~2%E5%85%B3%EF%BC%89/" title="SQL注入·sqli-labs·基于错误的字符串_数字型注入（第1~2关）">SQL注入·sqli-labs·基于错误的字符串_数字型注入（第1~2关）</a><time datetime="2020-12-10T13:03:19.587Z" title="Created 2020-12-10 21:03:19">2020-12-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/12/10/PHP%E5%8F%96%E7%BB%8F%EF%BC%88%E4%B8%80%EF%BC%89%E5%88%9D%E8%AF%86/" title="PHP取经（一）初识"><img src="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1582709614468&amp;di=5ffbec934c890aba60d63718f63a3c15&amp;imgtype=0&amp;src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201812%2F03%2F20181203221415_djuds.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="PHP取经（一）初识"/></a><div class="content"><a class="title" href="/2020/12/10/PHP%E5%8F%96%E7%BB%8F%EF%BC%88%E4%B8%80%EF%BC%89%E5%88%9D%E8%AF%86/" title="PHP取经（一）初识">PHP取经（一）初识</a><time datetime="2020-12-10T13:03:19.558Z" title="Created 2020-12-10 21:03:19">2020-12-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/12/10/PHP%E5%8F%96%E7%BB%8F%EF%BC%88%E4%BA%8C%EF%BC%89%E5%8F%98%E9%87%8F%E3%80%81%E6%A0%87%E9%87%8F%E3%80%81%E7%89%B9%E6%AE%8A%E7%B1%BB%E5%9E%8B%20%E8%B6%85%E8%AF%A6%E7%BB%86PHP%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="No title"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="No title"/></a><div class="content"><a class="title" href="/2020/12/10/PHP%E5%8F%96%E7%BB%8F%EF%BC%88%E4%BA%8C%EF%BC%89%E5%8F%98%E9%87%8F%E3%80%81%E6%A0%87%E9%87%8F%E3%80%81%E7%89%B9%E6%AE%8A%E7%B1%BB%E5%9E%8B%20%E8%B6%85%E8%AF%A6%E7%BB%86PHP%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="No title">No title</a><time datetime="2020-12-10T13:03:19.523Z" title="Created 2020-12-10 21:03:19">2020-12-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/12/10/Hexo-yilia%E4%B8%BB%E9%A2%98%E4%B8%AA%E6%80%A7%E5%8C%96%E7%BE%8E%E5%8C%96%E5%8F%8A%E5%8A%9F%E8%83%BD%E6%B7%BB%E5%8A%A0/" title="No title"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="No title"/></a><div class="content"><a class="title" href="/2020/12/10/Hexo-yilia%E4%B8%BB%E9%A2%98%E4%B8%AA%E6%80%A7%E5%8C%96%E7%BE%8E%E5%8C%96%E5%8F%8A%E5%8A%9F%E8%83%BD%E6%B7%BB%E5%8A%A0/" title="No title">No title</a><time datetime="2020-12-10T13:03:19.182Z" title="Created 2020-12-10 21:03:19">2020-12-10</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2020 By 大何生</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div></div><hr/><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>Powered by</span> <a target="_blank" rel="noopener" href="https://github.com/wzpan/hexo-generator-search" style="color:#49B1F5;">hexo-generator-search</a></div></div></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-heart.min.js" async="async" mobile="false"></script><script>(function(d, w, c) {
+    w.ChatraID = 'hXhhLzGi9p4fRtAYu';
+    var s = d.createElement('script');
+    w[c] = w[c] || function() {
+        (w[c].q = w[c].q || []).push(arguments);
+    };
+    s.async = true;
+    s.src = 'https://call.chatra.io/chatra.js';
+    if (d.head) d.head.appendChild(s);
+})(document, window, 'Chatra');
+
+if (false) {
+  var chatBtnFn = () => {
+    var chatBtn = document.getElementById("chat_btn")
+    chatBtn.addEventListener("click", function(){
+      Chatra('openChat')
+    });
+  }
+  chatBtnFn()
+} else {
+  if (false) {
+    function chatBtnHide () {
+      Chatra('hide')
+    }
+    function chatBtnShow () {
+      Chatra('show')
+    }
+  }
+}</script></div></body></html>
